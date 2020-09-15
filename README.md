@@ -11,6 +11,17 @@
 
 A **C** library to trace allocation function calls.
 
+## Installation ##
+
+Clone this repository, build the library and install it.
+
+```sh
+git clone https://github.com/mfederczuk/memtrace.git
+cd memtrace
+make
+sudo make install
+```
+
 ## Contributing ##
 
 Read through the [Memtrace Contribution Guidelines](./CONTRIBUTING.md)
