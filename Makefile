@@ -48,9 +48,9 @@ install/library: install/libmemtrace.so
 install/libmemtrace.so: libmemtrace.so
 	mkdir -p $(DESTDIR)$(libdir)
 	$(INSTALL) -m644 $< $(DESTDIR)$(libdir)/$<.1.0.0
-	ln -s $<.1.0.0 $(DESTDIR)$(libdir)/$<.1.0
-	ln -s $<.1.0   $(DESTDIR)$(libdir)/$<.1
-	ln -s $<.1     $(DESTDIR)$(libdir)/$<
+	ln -fs $<.1.0.0 $(DESTDIR)$(libdir)/$<.1.0
+	ln -fs $<.1.0   $(DESTDIR)$(libdir)/$<.1
+	ln -fs $<.1     $(DESTDIR)$(libdir)/$<
 .PHONY: install \
         install/headers \
         install/library \
