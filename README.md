@@ -24,6 +24,43 @@ make
 sudo make install
 ```
 
+## Usage ##
+
+Include `memtrace.h` in your *source* file. (can be before or after including
+ `stdlib.h`)  
+Avoid including it in other header files.
+
+```c
+#include <memtrace.h>
+#include <stdlib.h>
+
+int main() {
+	void* ptr = malloc(64);
+	free(ptr);
+}
+```
+
+Before including `memtrace.h`, the `_DEBUG` macro must be defined and expand to
+ a nonzero integer value. This is best done in the compiler arguments with
+ `-D_DEBUG`.
+
+The target binary must also be linked with the `memtrace` library.
+
+```sh
+cc -D_DEBUG main.c -lmemtrace
+```
+
+You can put the `include` directive inside an `if` directive and only set the
+ `_DEBUG` macro and only link the library for debug builds so that the end user,
+ that manually installs your program from source, does not need to install
+ **Memtrace** themself.
+
+```c
+#if (_DEBUG) + 0
+ #include <memtrace.h>
+#endif
+```
+
 ## Contributing ##
 
 Read through the [Memtrace Contribution Guidelines](./CONTRIBUTING.md)
