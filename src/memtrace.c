@@ -23,25 +23,33 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void* _memtrace_malloc(size_t size, const char* file, int line) {
 	void* ret_ptr = malloc(size);
-	printf("%s:%d: malloc(%zd): %p\n", file, line, size, ret_ptr);
+	fprintf(stderr, "%s:%d: malloc(%zd): %p\n", file, line, size, ret_ptr);
 	return ret_ptr;
 }
 
 void _memtrace_free(void* ptr, const char* file, int line) {
 	free(ptr);
-	printf("%s:%d: free(%p)\n", file, line, ptr);
+	fprintf(stderr, "%s:%d: free(%p)\n", file, line, ptr);
 }
 
 void* _memtrace_calloc(size_t nmemb, size_t size, const char* file, int line) {
 	void* ret_ptr = calloc(nmemb, size);
-	printf("%s:%d: calloc(%zd, %zd): %p\n", file, line, nmemb, size, ret_ptr);
+	fprintf(stderr, "%s:%d: calloc(%zd, %zd): %p\n", file, line, nmemb, size, ret_ptr);
 	return ret_ptr;
 }
 
 void* _memtrace_realloc(void* ptr, size_t size, const char* file, int line) {
 	void* ret_ptr = realloc(ptr, size);
-	printf("%s:%d: realloc(%p, %zd): %p\n", file, line, ptr, size, ret_ptr);
+	fprintf(stderr, "%s:%d: realloc(%p, %zd): %p\n", file, line, ptr, size, ret_ptr);
 	return ret_ptr;
 }
+
+#ifdef __cplusplus
+}
+#endif

@@ -19,7 +19,7 @@
 
 #ifndef _MEMTRACE_H
 #define _MEMTRACE_H
-#if (_DEBUG) + 0
+#if _MEMTRACE + 0
 
 #include <_memtrace.h>
 #include <stdlib.h>
@@ -29,5 +29,5 @@
 #define calloc(nmemb, size) (_memtrace_calloc  (nmemb, size,  __FILE__, __LINE__))
 #define realloc(ptr, size)  (_memtrace_realloc (ptr,  size,   __FILE__, __LINE__))
 
-#endif /* _DEBUG */
+#endif /* _MEMTRACE */
 #endif /* _MEMTRACE_H */
