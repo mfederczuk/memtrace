@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [Unreleased]: https://github.com/mfederczuk/memtrace/compare/v1.0.0...develop
 
+### Changed ###
+
+* Printing to `stderr` instead to `stdout`.
+
 ### Fixed ###
 
 * Fixed `if` directives. If the `_DEBUG` (now `_MEMTRACE`) macro would expand to

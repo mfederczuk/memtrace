@@ -7,7 +7,7 @@
 
 ## About ##
 
-A **C** library to trace allocation function calls by printing to them `stdout`.  
+A **C** library to trace allocation function calls by printing to them `stderr`.  
 The calls are printed out in a format of
  "`<file>:<line>: <function>(<args>...)[: <return>]`".
 
