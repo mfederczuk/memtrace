@@ -1,8 +1,8 @@
 # Memtrace #
 
-[version_shield]: https://img.shields.io/badge/version-v1.0.0-blue.svg
-[version_page]: https://github.com/mfederczuk/memtrace/releases/v1.0.0 "Release v1.0.0"
-[![version: v1.0.0][version_shield]][version_page]
+[version_shield]: https://img.shields.io/badge/version-2.0.0-blue.svg
+[version_page]: https://github.com/mfederczuk/memtrace/releases/v2.0.0 "Release v2.0.0"
+[![version: 2.0.0][version_shield]][version_page]
 [![Changelog](https://img.shields.io/badge/-Changelog-blue.svg)](./CHANGELOG.md "Changelog")
 
 ## About ##

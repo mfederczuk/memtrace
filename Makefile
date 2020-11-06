@@ -47,10 +47,10 @@ install/headers: include/_memtrace.h include/memtrace.h
 install/library: install/libmemtrace.so
 install/libmemtrace.so: libmemtrace.so
 	mkdir -p $(DESTDIR)$(libdir)
-	$(INSTALL) -m644 $< $(DESTDIR)$(libdir)/$<.1.0.0
-	ln -fs $<.1.0.0 $(DESTDIR)$(libdir)/$<.1.0
-	ln -fs $<.1.0   $(DESTDIR)$(libdir)/$<.1
-	ln -fs $<.1     $(DESTDIR)$(libdir)/$<
+	$(INSTALL) -m644 $< $(DESTDIR)$(libdir)/$<.2.0.0
+	ln -fs $<.2.0.0 $(DESTDIR)$(libdir)/$<.2.0
+	ln -fs $<.2.0   $(DESTDIR)$(libdir)/$<.2
+	ln -fs $<.2     $(DESTDIR)$(libdir)/$<
 .PHONY: install \
         install/headers \
         install/library \
@@ -62,9 +62,9 @@ uninstall/headers:
 uninstall/library: uninstall/libmemtrace.so
 uninstall/libmemtrace.so:
 	rm -f $(DESTDIR)$(libdir)/libmemtrace.so
-	rm -f $(DESTDIR)$(libdir)/libmemtrace.so.1
-	rm -f $(DESTDIR)$(libdir)/libmemtrace.so.1.0
-	rm -f $(DESTDIR)$(libdir)/libmemtrace.so.1.0.0
+	rm -f $(DESTDIR)$(libdir)/libmemtrace.so.2
+	rm -f $(DESTDIR)$(libdir)/libmemtrace.so.2.0
+	rm -f $(DESTDIR)$(libdir)/libmemtrace.so.2.0.0
 .PHONY: uninstall \
         uninstall/headers \
         uninstall/library \
