@@ -20,10 +20,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Fixed `if` directives. If the `_DEBUG` (now `_MEMTRACE`) macro would expand to
    an empty expression, ERROR
 
-## [v1.0.0] - 2020-09-16 ##
+## [1.0.0] - 2020-09-16 ##
 
-[v1.0.0]: https://github.com/mfederczuk/memtrace/release/tags/v1.0.0
+[1.0.0]: https://github.com/mfederczuk/memtrace/releases/v1.0.0
 
 ### Added ###
 
-* `memtrace.h` that define macros for `malloc`, `free`, `calloc` and `realloc`
+* `memtrace.h` header that defines macros for `malloc`, `free`, `calloc` and
+   `realloc`
