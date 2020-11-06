@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed ###
 
+* Using `_MEMTRACE` as macro instead of `_DEBUG`
 * Printing to `stderr` instead to `stdout`.
 
 ### Fixed ###

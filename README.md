@@ -38,23 +38,23 @@ int main() {
 }
 ```
 
-Before including `memtrace.h`, the `_DEBUG` macro must be defined and expand to
+Before including `memtrace.h`, the `_MEMTRACE` macro must be defined and expand to
  a nonzero integer value. This is best done in the compiler arguments with
- `-D_DEBUG`.
+ `-D_MEMTRACE`.
 
 The target binary must also be linked with the `memtrace` library.
 
 ```sh
-cc -D_DEBUG main.c -lmemtrace
+cc -D_MEMTRACE main.c -lmemtrace
 ```
 
 You can put the `include` directive inside an `if` directive and only set the
- `_DEBUG` macro and only link the library for debug builds so that the end user,
- that manually installs your program from source, does not need to install
+ `_MEMTRACE` macro and only link the library for debug builds so that the end
+ user, that manually installs your program from source, does not need to install
  **Memtrace** themself.
 
 ```c
-#if _DEBUG + 0
+#if _MEMTRACE + 0
  #include <memtrace.h>
 #endif
 ```
