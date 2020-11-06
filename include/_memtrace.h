@@ -20,7 +20,7 @@
 #ifndef __MEMTRACE_H
 #define __MEMTRACE_H
 
-#if !defined(_MEMTRACE_H) && !((_MEMTRACE_SOURCE) + 0)
+#if !defined(_MEMTRACE_H) && !(_MEMTRACE_SOURCE + 0)
 	#error Do not include _memtrace.h directly, include memtrace.h instead.
 #endif
 

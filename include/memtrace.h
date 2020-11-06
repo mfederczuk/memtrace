@@ -19,7 +19,7 @@
 
 #ifndef _MEMTRACE_H
 #define _MEMTRACE_H
-#if (_DEBUG) + 0
+#if _DEBUG + 0
 
 #include <_memtrace.h>
 #include <stdlib.h>

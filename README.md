@@ -54,7 +54,7 @@ You can put the `include` directive inside an `if` directive and only set the
  **Memtrace** themself.
 
 ```c
-#if (_DEBUG) + 0
+#if _DEBUG + 0
  #include <memtrace.h>
 #endif
 ```
