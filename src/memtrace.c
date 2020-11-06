@@ -23,6 +23,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void* _memtrace_malloc(size_t size, const char* file, int line) {
 	void* ret_ptr = malloc(size);
 	fprintf(stderr, "%s:%d: malloc(%zd): %p\n", file, line, size, ret_ptr);
@@ -45,3 +49,7 @@ void* _memtrace_realloc(void* ptr, size_t size, const char* file, int line) {
 	fprintf(stderr, "%s:%d: realloc(%p, %zd): %p\n", file, line, ptr, size, ret_ptr);
 	return ret_ptr;
 }
+
+#ifdef __cplusplus
+}
+#endif
