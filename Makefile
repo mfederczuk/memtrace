@@ -8,7 +8,8 @@ exec_prefix = $(prefix)
 includedir  = $(prefix)/include
 libdir      = $(exec_prefix)/lib
 
-CFLAGS = -Iinclude -std=c99 -Wall -Wextra -pedantic -pedantic-errors
+CFLAGS = -Iinclude -std=c99 \
+         -Wall -Wextra -pedantic -Wpedantic -pedantic-errors -Werror=pedantic
 
 CC      ?= cc
 INSTALL ?= install
