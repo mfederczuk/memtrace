@@ -4,11 +4,11 @@
  * SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
  */
 
-#ifndef __MEMTRACE_H
-#define __MEMTRACE_H
+#ifndef MEMTRACE_INTERNAL_H
+#define MEMTRACE_INTERNAL_H
 
 #if !defined(MEMTRACE_H) && !(_MEMTRACE_SOURCE + 0)
-	#error Do not include _memtrace.h directly, include memtrace.h instead.
+	#error Do not include _memtrace_internal.h directly, include memtrace.h instead.
 #endif
 
 #include <stddef.h>
@@ -26,4 +26,4 @@ void* memtrace_internal_realloc (void*  ptr,   size_t size, const char* file, in
 }
 #endif
 
-#endif /* __MEMTRACE_H */
+#endif /* MEMTRACE_INTERNAL_H */

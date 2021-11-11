@@ -1,5 +1,5 @@
 #!/usr/bin/make -f
-# Copyright (c) 2020 Michael Federczuk
+# Copyright (c) 2021 Michael Federczuk
 # SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
 
 SHELL = /bin/sh
@@ -28,7 +28,7 @@ libmemtrace.so: bin/memtrace.c.so
 .PHONY: library
 
 install: install/headers install/library
-install/headers: include/_memtrace.h include/memtrace.h
+install/headers: include/_memtrace_internal.h include/memtrace.h
 	mkdir -p $(DESTDIR)$(includedir)
 	$(INSTALL) -m644 $^ $(DESTDIR)$(includedir)
 install/library: install/libmemtrace.so
@@ -45,7 +45,7 @@ install/libmemtrace.so: libmemtrace.so
 
 uninstall: uninstall/headers uninstall/library
 uninstall/headers:
-	rm -f $(DESTDIR)$(includedir)/_memtrace.h $(DESTDIR)$(includedir)/memtrace.h
+	rm -f $(DESTDIR)$(includedir)/_memtrace_internal.h $(DESTDIR)$(includedir)/memtrace.h
 uninstall/library: uninstall/libmemtrace.so
 uninstall/libmemtrace.so:
 	rm -f $(DESTDIR)$(libdir)/libmemtrace.so

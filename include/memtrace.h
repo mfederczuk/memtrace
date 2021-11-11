@@ -8,7 +8,7 @@
 #define MEMTRACE_H
 #if _MEMTRACE + 0
 
-#include <_memtrace.h>
+#include <_memtrace_internal.h>
 #include <stdlib.h>
 
 #define malloc(size)        (memtrace_internal_malloc  (size,         __FILE__, __LINE__))

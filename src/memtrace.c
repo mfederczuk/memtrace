@@ -6,7 +6,7 @@
 
 #define _MEMTRACE_SOURCE 1
 
-#include <_memtrace.h>
+#include <_memtrace_internal.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
