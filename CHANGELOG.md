@@ -15,8 +15,14 @@ and this project adheres to [**Semantic Versioning v2.0.0**](https://semver.org/
 
 ### Added ###
 
-* Issues a compiler warning when `NDEBUG` is defined and `memtrace.h` is included.  
-  May be disabled by defining `MEMTRACE_CONFIG_IGNORE_NDEBUG` as a nonzero value
+* Issues a compiler warning when `NDEBUG` is defined and `memtrace3.h` is included.  
+  May be disabled by defining `MEMTRACE3_CONFIG_IGNORE_NDEBUG` as a nonzero value
+
+### Changed ###
+
+* Headers, macros, etc. will from now on always be suffixed with the major version.
+  * The header filename was changed from `memtrace.h` to `memtrace3.h`
+  * The library name was changed from `memtrace` to `memtrace3`
 
 ### Removed ###
 

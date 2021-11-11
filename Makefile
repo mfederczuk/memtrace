@@ -14,6 +14,13 @@ CFLAGS = -Iinclude -std=c99 \
 CC      ?= cc
 INSTALL ?= install
 
+override memtrace_major_version := 3
+override memtrace_minor_version := 0
+override memtrace_patch_version := 0
+
+override memtrace_major_minor_version := $(memtrace_major_version).$(memtrace_minor_version)
+override memtrace_version := $(memtrace_major_minor_version).$(memtrace_patch_version)
+
 all: libmemtrace.so
 .PHONY: all
 
@@ -26,22 +33,20 @@ libmemtrace.so: bin/memtrace.c.so
 
 install: libmemtrace.so
 	mkdir -p -- $(DESTDIR)$(libdir)
-	$(INSTALL) -m644 -- $< $(DESTDIR)$(libdir)/$<.2.0.0
+	$(INSTALL) -m644 -- $< $(DESTDIR)$(libdir)/$(basename $<)$(memtrace_version)$(suffix $<)
 
-	ln -fs -- $<.2.0.0 $(DESTDIR)$(libdir)/$<.2.0
-	ln -fs -- $<.2.0   $(DESTDIR)$(libdir)/$<.2
-	ln -fs -- $<.2     $(DESTDIR)$(libdir)/$<
+	ln -fs -- $(basename $<)$(memtrace_version)$(suffix $<)             $(DESTDIR)$(libdir)/$(basename $<)$(memtrace_major_minor_version)$(suffix $<)
+	ln -fs -- $(basename $<)$(memtrace_major_minor_version)$(suffix $<) $(DESTDIR)$(libdir)/$(basename $<)$(memtrace_major_version)$(suffix $<)
 
 	mkdir -p -- $(DESTDIR)$(includedir)
-	$(INSTALL) -m644 -- include/_memtrace_internal.h include/memtrace.h $(DESTDIR)$(includedir)
+	$(INSTALL) -m644 -- include/_memtrace$(memtrace_major_version)_internal.h include/memtrace$(memtrace_major_version).h $(DESTDIR)$(includedir)
 .PHONY: install
 
 uninstall:
-	rm -f -- $(DESTDIR)$(includedir)/memtrace.h $(DESTDIR)$(includedir)/_memtrace_internal.h \
-	         $(DESTDIR)$(libdir)/libmemtrace.so \
-	         $(DESTDIR)$(libdir)/libmemtrace.so.2 \
-	         $(DESTDIR)$(libdir)/libmemtrace.so.2.0 \
-	         $(DESTDIR)$(libdir)/libmemtrace.so.2.0.0
+	rm -f -- $(DESTDIR)$(includedir)/memtrace$(memtrace_major_version).h $(DESTDIR)$(includedir)/_memtrace$(memtrace_major_version)_internal.h \
+	         $(DESTDIR)$(libdir)/libmemtrace$(memtrace_major_version).so \
+	         $(DESTDIR)$(libdir)/libmemtrace$(memtrace_major_minor_version).so \
+	         $(DESTDIR)$(libdir)/libmemtrace$(memtrace_version).so
 .PHONY: uninstall
 
 clean:

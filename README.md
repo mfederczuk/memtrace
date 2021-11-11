@@ -19,12 +19,12 @@ The calls are printed out in the format of "`<source_file>:<line>: <function_nam
 
 ## Usage ##
 
-Include both `stdlib.h` and `memtrace.h` in *source* files that you want to debug.
-In which order you include `stdlib.h` and `memtrace.h` doesn't matter.  
-Do *not* include `memtrace.h` in any header files!
+Include both `stdlib.h` and `memtrace3.h` in *source* files that you want to debug.
+In which order you include `stdlib.h` and `memtrace3.h` doesn't matter.  
+Do *not* include `memtrace3.h` in any header files!
 
 ```c
-#include <memtrace.h>
+#include <memtrace3.h>
 #include <stdlib.h>
 
 int main() {
@@ -33,25 +33,32 @@ int main() {
 }
 ```
 
-The target binary must also be linked with the `memtrace` library.
+The target binary must also be linked with the `memtrace3` library.
 
 ```sh
-cc main.c -lmemtrace
+cc main.c -lmemtrace3
+```
+
+Major and minor versions can also be specified when linking.
+
+```sh
+cc main.c -lmemtrace3.0
+cc main.c -lmemtrace3.0.0
 ```
 
 **Memtrace** should *purely* be used for debugging purposes.
 To make sure that the end user, that is manually building and installing your software, doesn't need to download and
-install **Memtrace** themselves, you should wrap the directive where you include `memtrace.h` inside a preprocessor `if`
+install **Memtrace** themselves, you should wrap the directive where you include `memtrace3.h` inside a preprocessor `if`
 block, which should only be entered when compiling debug builds of your software.
 
 ```c
 #ifndef NDEBUG
- #include <memtrace.h>
+ #include <memtrace3.h>
 #endif
 ```
 
-When the `NDEBUG` macro is defined and `memtrace.h` is included, a warning will be given.  
-This warning may be disabled by defining the `MEMTRACE_CONFIG_IGNORE_NDEBUG` macro as an expression that evaluates to a
+When the `NDEBUG` macro is defined and `memtrace3.h` is included, a warning will be given.  
+This warning may be disabled by defining the `MEMTRACE3_CONFIG_IGNORE_NDEBUG` macro as an expression that evaluates to a
 nonzero value.
 
 ### Example ###
@@ -59,7 +66,7 @@ nonzero value.
 #### `main.c` ####
 
 ```c
-#include <memtrace.h>
+#include <memtrace3.h>
 #include <stdlib.h>
 
 int main() {
@@ -78,7 +85,7 @@ int main() {
 #### Possible Output ####
 
 ```txt
-$ cc main.c -lmemtrace && ./a.out
+$ cc main.c -lmemtrace3 && ./a.out
 main.c:7: malloc(256): 0x561d520912a0
 main.c:9: realloc(0x561d520912a0, 512): 0x561d520912a0
 main.c:11: free(0x561d520912a0)
@@ -91,8 +98,8 @@ main.c:15: free(0x561d520914b0)
 Clone this repository, build the library and install it.
 
 ```sh
-git clone https://github.com/mfederczuk/memtrace.git &&
-	cd memtrace &&
+git clone -b v3.0.0 -o memtrace3 https://github.com/mfederczuk/memtrace.git &&
+	cd memtrace3 &&
 	make &&
 	sudo make install
 ```
