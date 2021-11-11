@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
  */
 
-#define _MEMTRACE_SOURCE 1
+#define MEMTRACE_INTERNAL_SOURCE 1
 
 #include <_memtrace_internal.h>
 #include <stddef.h>

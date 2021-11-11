@@ -7,7 +7,7 @@
 #ifndef MEMTRACE_INTERNAL_H
 #define MEMTRACE_INTERNAL_H
 
-#if !defined(MEMTRACE_H) && !(_MEMTRACE_SOURCE + 0)
+#if !defined(MEMTRACE_H) && !(MEMTRACE_INTERNAL_SOURCE + 0)
 	#error Do not include _memtrace_internal.h directly, include memtrace.h instead.
 #endif
 
