@@ -50,6 +50,10 @@ block, which should only be entered when compiling debug builds of your software
 #endif
 ```
 
+When the `NDEBUG` macro is defined and `memtrace.h` is included, a warning will be given.  
+This warning may be disabled by defining the `MEMTRACE_CONFIG_IGNORE_NDEBUG` macro as an expression that evaluates to a
+nonzero value.
+
 ### Example ###
 
 #### `main.c` ####

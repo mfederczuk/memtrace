@@ -7,6 +7,10 @@
 #ifndef MEMTRACE_H
 #define MEMTRACE_H
 
+#if defined(NDEBUG) && !(MEMTRACE_CONFIG_IGNORE_NDEBUG + 0)
+	#warning NDEBUG is defined and memtrace.h is included.
+#endif
+
 #include <_memtrace_internal.h>
 #include <stdlib.h>
 

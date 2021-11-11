@@ -13,6 +13,11 @@ and this project adheres to [**Semantic Versioning v2.0.0**](https://semver.org/
 
 ## Unreleased ##
 
+### Added ###
+
+* Issues a compiler warning when `NDEBUG` is defined and `memtrace.h` is included.  
+  May be disabled by defining `MEMTRACE_CONFIG_IGNORE_NDEBUG` as a nonzero value
+
 ### Removed ###
 
 * The `_MEMTRACE` macro is not queried anymore; **Memtrace** is now always enabled when including `memtrace.h`
