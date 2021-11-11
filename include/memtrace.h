@@ -6,7 +6,6 @@
 
 #ifndef MEMTRACE_H
 #define MEMTRACE_H
-#if _MEMTRACE + 0
 
 #include <_memtrace_internal.h>
 #include <stdlib.h>
@@ -16,5 +15,4 @@
 #define calloc(nmemb, size) (memtrace_internal_calloc  (nmemb, size,  __FILE__, __LINE__))
 #define realloc(ptr, size)  (memtrace_internal_realloc (ptr,  size,   __FILE__, __LINE__))
 
-#endif /* _MEMTRACE */
 #endif /* MEMTRACE_H */

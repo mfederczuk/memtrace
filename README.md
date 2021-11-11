@@ -33,23 +33,10 @@ int main() {
 }
 ```
 
-To enable **Memtrace**, the `_MEMTRACE` macro must be defined and expand to a nonzero value *before* the `memtrace.h`
-header is included.  
-To do this, you can pass the option `-D_MEMTRACE` to your compiler.
-
 The target binary must also be linked with the `memtrace` library.
 
 ```sh
-cc -D_MEMTRACE main.c -lmemtrace
-```
-
-For quick debugging, it is also possible to define the macro in the source code.
-
-```c
-#define _MEMTRACE 1
-
-#include <memtrace.h>
-#include <stdlib.h>
+cc main.c -lmemtrace
 ```
 
 **Memtrace** should *purely* be used for debugging purposes.
@@ -59,7 +46,6 @@ block, which should only be entered when compiling debug builds of your software
 
 ```c
 #ifndef NDEBUG
- #define _MEMTRACE 1
  #include <memtrace.h>
 #endif
 ```
@@ -69,8 +55,6 @@ block, which should only be entered when compiling debug builds of your software
 #### `main.c` ####
 
 ```c
-#define _MEMTRACE 1
-
 #include <memtrace.h>
 #include <stdlib.h>
 
