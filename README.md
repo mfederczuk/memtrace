@@ -59,6 +59,40 @@ block, which should only be entered when compiling debug builds of your software
 #endif
 ```
 
+### Example ###
+
+#### `main.c` ####
+
+```c
+#define _MEMTRACE 1
+
+#include <memtrace.h>
+#include <stdlib.h>
+
+int main() {
+	int *v = malloc(sizeof(int) * 64);
+
+	v = realloc(v, sizeof(int) * 128);
+
+	free(v);
+
+	v = calloc(32, sizeof(int));
+
+	free(v);
+}
+```
+
+#### Possible Output ####
+
+```txt
+$ cc main.c -lmemtrace && ./a.out
+main.c:7: malloc(256): 0x561d520912a0
+main.c:9: realloc(0x561d520912a0, 512): 0x561d520912a0
+main.c:11: free(0x561d520912a0)
+main.c:13: calloc(32, 4): 0x561d520914b0
+main.c:15: free(0x561d520914b0)
+```
+
 ## Download & Installation ##
 
 Clone this repository, build the library and install it.
