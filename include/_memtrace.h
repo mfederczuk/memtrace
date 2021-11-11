@@ -1,6 +1,6 @@
 // <_memtrace.h>
 /*
- * Copyright (c) 2020 Michael Federczuk
+ * Copyright (c) 2021 Michael Federczuk
  *
  * SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
  */
@@ -18,10 +18,10 @@
 extern "C" {
 #endif
 
-void* _memtrace_malloc  (size_t size,               const char* file, int line);
-void  _memtrace_free    (void*  ptr,                const char* file, int line);
-void* _memtrace_calloc  (size_t nmemb, size_t size, const char* file, int line);
-void* _memtrace_realloc (void*  ptr,   size_t size, const char* file, int line);
+void* memtrace_internal_malloc  (size_t size,               const char* file, int line);
+void  memtrace_internal_free    (void*  ptr,                const char* file, int line);
+void* memtrace_internal_calloc  (size_t nmemb, size_t size, const char* file, int line);
+void* memtrace_internal_realloc (void*  ptr,   size_t size, const char* file, int line);
 
 #ifdef __cplusplus
 }
