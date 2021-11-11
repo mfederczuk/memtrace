@@ -1,4 +1,3 @@
-/* <memtrace.h> */
 /*
  * Copyright (c) 2021 Michael Federczuk
  *
