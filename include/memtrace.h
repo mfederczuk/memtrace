@@ -5,8 +5,8 @@
  * SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
  */
 
-#ifndef _MEMTRACE_H
-#define _MEMTRACE_H
+#ifndef MEMTRACE_H
+#define MEMTRACE_H
 #if _MEMTRACE + 0
 
 #include <_memtrace.h>
@@ -18,4 +18,4 @@
 #define realloc(ptr, size)  (memtrace_internal_realloc (ptr,  size,   __FILE__, __LINE__))
 
 #endif /* _MEMTRACE */
-#endif /* _MEMTRACE_H */
+#endif /* MEMTRACE_H */
