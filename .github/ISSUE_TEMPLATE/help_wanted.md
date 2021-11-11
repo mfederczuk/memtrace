@@ -1,13 +1,9 @@
 ---
 name: Help Wanted
 about: Ask for help on a task
-labels: 'Status :: Requested, Priority :: Medium, Type :: Other, Help Wanted'
+labels: 'Scope: N/A, Help Wanted, Priority #2: Medium, Status #1: Requested'
 ---
 
 # Help Wanted #
 
-**On Issue**: _____
-
-## Description ##
-
-Describe what you need help with.
+[description of what needs extra attention]
