@@ -1,8 +1,10 @@
-All Markdown files, which are files whose names end with '.md', are licensed under:
+All Markdown files, which are files whose name end with '.md', are licensed under:
 
         Creative Commons Attribution Share Alike 4.0 International (LICENSES/CC-BY-SA-4.0.txt)
 
-All other files that do not match any of the before laid out rules, except the license files, which are all files
-located in the 'LICENSES' directory, are licensed under:
+The raw license files, which are all files inside the 'LICENSES' directory, are verbatim copies from their original
+source. Copyright belongs to their respectful authors.
+
+All other files that do not match any of the before laid out rules are licensed under:
 
         GNU General Public License v3.0 or later (LICENSES/GNU-GPL-v3.0.txt)
