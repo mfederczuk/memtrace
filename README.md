@@ -61,6 +61,11 @@ When the `NDEBUG` macro is defined and `memtrace3.h` is included, a warning will
 This warning may be disabled by defining the `MEMTRACE3_CONFIG_IGNORE_NDEBUG` macro as an expression that evaluates to a
 nonzero value.
 
+By default, when a macro with the same name of an allocation function is defined, including `memtrace3.h` will issue an
+error.  
+Defining the `MEMTRACE3_CONFIG_ALLOW_REDEFINE` macro as an expression that evaluates to a nonzero value will first
+undefine the macros.
+
 ### Example ###
 
 #### `main.c` ####

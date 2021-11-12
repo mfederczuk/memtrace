@@ -17,6 +17,7 @@ and this project adheres to [**Semantic Versioning v2.0.0**](https://semver.org/
 
 * Issues a compiler warning when `NDEBUG` is defined and `memtrace3.h` is included.  
   May be disabled by defining `MEMTRACE3_CONFIG_IGNORE_NDEBUG` as a nonzero value
+* Allows to redefine macros by defining `MEMTRACE3_CONFIG_ALLOW_REDEFINE` as a nonzero value
 
 ### Changed ###
 
