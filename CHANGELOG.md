@@ -29,6 +29,10 @@ and this project adheres to [**Semantic Versioning v2.0.0**](https://semver.org/
 
 * The `_MEMTRACE` macro is not queried anymore; **Memtrace** is now always enabled when including `memtrace.h`
 
+### Fixed ###
+
+* The value of `errno` will now be restored after the printing calls
+
 ## [v2.0.0] - 2020-11-06 ##
 
 [v2.0.0]: https://github.com/mfederczuk/memtrace/releases/v2.0.0
