@@ -37,9 +37,9 @@
 #undef calloc
 #undef realloc
 
-#define malloc(size)        (memtrace3_internal_malloc  (size,         __FILE__, __LINE__))
-#define free(ptr)           (memtrace3_internal_free    (ptr,          __FILE__, __LINE__))
-#define calloc(nmemb, size) (memtrace3_internal_calloc  (nmemb, size,  __FILE__, __LINE__))
-#define realloc(ptr, size)  (memtrace3_internal_realloc (ptr,  size,   __FILE__, __LINE__))
+#define malloc(size)        (memtrace3_internal_malloc  ((size),          __FILE__, __LINE__))
+#define free(ptr)           (memtrace3_internal_free    ((ptr),           __FILE__, __LINE__))
+#define calloc(nmemb, size) (memtrace3_internal_calloc  ((nmemb), (size), __FILE__, __LINE__))
+#define realloc(ptr, size)  (memtrace3_internal_realloc ((ptr),   (size), __FILE__, __LINE__))
 
 #endif /* MEMTRACE3_H */
