@@ -110,5 +110,5 @@ Read through the [Contribution Guidelines](CONTRIBUTING.md) if you want to contr
 
 ## License ##
 
-**Memtrace** is licensed under [**GNU GPL v3.0**](licenses/GNU-GPL-v3.0.txt) or later.  
+**Memtrace** is licensed under [**GNU GPL v3.0**](LICENSES/GNU-GPL-v3.0.txt) or later.  
 For more information about copying and licensing, see the [COPYING.txt](COPYING.txt) file.
