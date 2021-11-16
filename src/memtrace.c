@@ -28,11 +28,6 @@ void* memtrace3_internal_malloc(size_t size, const char* file, int line) {
 	return ret_ptr;
 }
 
-void memtrace3_internal_free(void* ptr, const char* file, int line) {
-	fprintf(stderr, "%s:%d: free(%p)\n", file, line, ptr);
-	free(ptr);
-}
-
 void* memtrace3_internal_calloc(size_t nmemb, size_t size, const char* file, int line) {
 	fprintf(stderr, "%s:%d: calloc(%zu, %zu)", file, line, nmemb, size);
 
@@ -55,6 +50,11 @@ void* memtrace3_internal_realloc(void* ptr, size_t size, const char* file, int l
 
 	errno = local_errno;
 	return ret_ptr;
+}
+
+void memtrace3_internal_free(void* ptr, const char* file, int line) {
+	fprintf(stderr, "%s:%d: free(%p)\n", file, line, ptr);
+	free(ptr);
 }
 
 #ifdef __cplusplus

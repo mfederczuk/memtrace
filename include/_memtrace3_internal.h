@@ -18,9 +18,9 @@ extern "C" {
 #endif
 
 void* memtrace3_internal_malloc  (size_t size,               const char* file, int line);
-void  memtrace3_internal_free    (void*  ptr,                const char* file, int line);
 void* memtrace3_internal_calloc  (size_t nmemb, size_t size, const char* file, int line);
 void* memtrace3_internal_realloc (void*  ptr,   size_t size, const char* file, int line);
+void  memtrace3_internal_free    (void*  ptr,                const char* file, int line);
 
 #ifdef __cplusplus
 }
