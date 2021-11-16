@@ -19,7 +19,7 @@ extern "C" {
 void* memtrace3_internal_malloc(size_t size, const char* file, int line) {
 	fprintf(stderr, "%s:%d: malloc(%zu)", file, line, size);
 
-	void* ret_ptr = malloc(size);
+	void* const ret_ptr = malloc(size);
 	const int local_errno = errno;
 
 	fprintf(stderr, ": %p\n", ret_ptr);
@@ -36,7 +36,7 @@ void memtrace3_internal_free(void* ptr, const char* file, int line) {
 void* memtrace3_internal_calloc(size_t nmemb, size_t size, const char* file, int line) {
 	fprintf(stderr, "%s:%d: calloc(%zu, %zu)", file, line, nmemb, size);
 
-	void* ret_ptr = calloc(nmemb, size);
+	void* const ret_ptr = calloc(nmemb, size);
 	const int local_errno = errno;
 
 	fprintf(stderr, ": %p\n", ret_ptr);
@@ -48,7 +48,7 @@ void* memtrace3_internal_calloc(size_t nmemb, size_t size, const char* file, int
 void* memtrace3_internal_realloc(void* ptr, size_t size, const char* file, int line) {
 	fprintf(stderr, "%s:%d: realloc(%p, %zu)", file, line, ptr, size);
 
-	void* ret_ptr = realloc(ptr, size);
+	void* const ret_ptr = realloc(ptr, size);
 	const int local_errno = errno;
 
 	fprintf(stderr, ": %p\n", ret_ptr);
