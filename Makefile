@@ -22,11 +22,28 @@ ifneq "$(STDC)" ""
  override STDC := -std=$(STDC)
 endif
 
-CFLAGS = -Iinclude $(STDC) \
-         -Wall -Wextra -pedantic -Wpedantic -pedantic-errors -Werror=pedantic
+override real_cc := $(notdir $(realpath $(shell command -v $(CC))))
 
-CC      ?= cc
-INSTALL ?= install
+ifeq "$(real_cc)" ""
+ $(error Invalid compiler command: $(CC))
+endif
+
+ifeq "$(findstring gcc,$(real_cc))" "gcc"
+ override c99_compat := -Wc99-c11-compat
+else
+ ifeq "$(findstring gnu,$(real_cc))" "gnu"
+  override c99_compat := -Wc99-c11-compat
+ else
+  ifeq "$(findstring clang,$(real_cc))" "clang"
+   override c99_compat := -Wc99-compat
+  else
+   $(warning Could not determine compiler; no C99 compatibility flag added)
+  endif
+ endif
+endif
+
+CFLAGS = -Iinclude $(STDC) $(c99_compat) \
+         -Wall -Wextra -pedantic -Wpedantic -pedantic-errors -Werror=pedantic
 
 override memtrace_major_version := 3
 override memtrace_minor_version := 0
