@@ -8,6 +8,16 @@ exec_prefix = $(prefix)
 includedir  = $(prefix)/include
 libdir      = $(exec_prefix)/lib
 
+CC      ?= cc
+INSTALL ?= install
+
+ifeq "$(CC)" ""
+ $(error CC must not be empty)
+endif
+ifeq "$(INSTALL)" ""
+ $(error INSTALL must not be empty)
+endif
+
 ifneq "$(STDC)" ""
  override STDC := -std=$(STDC)
 endif
