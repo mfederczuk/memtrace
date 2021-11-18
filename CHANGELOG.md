@@ -36,6 +36,7 @@ and this project adheres to [**Semantic Versioning v2.0.0**](https://semver.org/
 ### Fixed ###
 
 * The value of `errno` will now be restored after the printing calls
+* Replace `#warning` directive in header with `_Pragma` operators for pedantic compatibility
 
 ## [v2.0.0] - 2020-11-06 ##
 

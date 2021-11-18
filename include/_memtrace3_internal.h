@@ -7,12 +7,30 @@
 #ifndef MEMTRACE3_INTERNAL_H
 #define MEMTRACE3_INTERNAL_H
 
+
 #if !defined(MEMTRACE3_H) && !(MEMTRACE3_INTERNAL_SOURCE + 0)
 	#error Do not include _memtrace_internal.h directly, include memtrace.h instead.
 #endif
 
+
+#define MEMTRACE3_INTERNAL_STRINGIFY(s) #s
+
+#if defined(__GNUC__) || defined(__clang__)
+	#define MEMTRACE3_INTERNAL_ISSUE_WARNING(warning_message) \
+		_Pragma(MEMTRACE3_INTERNAL_STRINGIFY(GCC warning warning_message))
+#elif defined(_MSC_VER)
+	// FIXME: this is untested
+	#define MEMTRACE3_INTERNAL_ISSUE_WARNING(warning_message) \
+		_Pragma(MEMTRACE3_INTERNAL_STRINGIFY(message(warning_message)))
+#else
+	#define MEMTRACE3_INTERNAL_ISSUE_WARNING(warning_message) \
+		_Pragma(MEMTRACE3_INTERNAL_STRINGIFY(message warning_message))
+#endif
+
+
 #include <stddef.h>
 #include <stdio.h>
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -30,5 +48,6 @@ int   memtrace3_internal_fclose  (FILE* stream,                                 
 #ifdef __cplusplus
 }
 #endif
+
 
 #endif /* MEMTRACE3_INTERNAL_H */
