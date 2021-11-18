@@ -55,9 +55,9 @@ override memtrace_version := $(memtrace_major_minor_version).$(memtrace_patch_ve
 all: libmemtrace.so
 .PHONY: all
 
-bin/memtrace.c.so: src/memtrace.c
+bin/memtrace.c.so: src/memtrace.c src/memtrace_print_quoted_string.c
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $^ -o $@ -fPIC
+	$(CC) $(CFLAGS) -c $< -o $@ -fPIC
 
 libmemtrace.so: bin/memtrace.c.so
 	$(CC) $(CFLAGS) $^ -o $@ -shared

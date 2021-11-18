@@ -12,6 +12,7 @@
 #endif
 
 #include <stddef.h>
+#include <stdio.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -21,6 +22,10 @@ void* memtrace3_internal_malloc  (size_t size,               const char* file, i
 void* memtrace3_internal_calloc  (size_t nmemb, size_t size, const char* file, int line);
 void* memtrace3_internal_realloc (void*  ptr,   size_t size, const char* file, int line);
 void  memtrace3_internal_free    (void*  ptr,                const char* file, int line);
+
+FILE* memtrace3_internal_fopen   (const char* pathname, char const* mode,               const char* file, int line);
+FILE* memtrace3_internal_freopen (const char* pathname, char const* mode, FILE* stream, const char* file, int line);
+int   memtrace3_internal_fclose  (FILE* stream,                                         const char* file, int line);
 
 #ifdef __cplusplus
 }

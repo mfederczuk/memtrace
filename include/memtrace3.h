@@ -12,23 +12,32 @@
 #endif
 
 #include <_memtrace3_internal.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 #if !(MEMTRACE3_CONFIG_ALLOW_REDEFINE + 0)
 	#ifdef malloc
 		#error malloc already defined
 	#endif
-
 	#ifdef free
 		#error free already defined
 	#endif
-
 	#ifdef calloc
 		#error calloc already defined
 	#endif
-
 	#ifdef realloc
 		#error realloc already defined
+	#endif
+
+
+	#ifdef fopen
+		#error fopen already defined
+	#endif
+	#ifdef freopen
+		#error freopen already defined
+	#endif
+	#ifdef fclose
+		#error fclose already defined
 	#endif
 #endif
 
@@ -44,6 +53,16 @@
 
 #undef  free
 #define free(ptr)           (memtrace3_internal_free    ((ptr),           __FILE__, __LINE__))
+
+
+#undef  fopen
+#define fopen(pathname, mode)           (memtrace3_internal_fopen   ((pathname), (mode),           __FILE__, __LINE__))
+
+#undef  freopen
+#define freopen(pathname, mode, stream) (memtrace3_internal_freopen ((pathname), (mode), (stream), __FILE__, __LINE__))
+
+#undef  fclose
+#define fclose(stream)                  (memtrace3_internal_fclose  ((stream),                     __FILE__, __LINE__))
 
 
 #endif /* MEMTRACE3_H */
