@@ -7,7 +7,7 @@
 #ifndef MEMTRACE3_H
 #define MEMTRACE3_H
 
-#include <_memtrace3_internal.h>
+#include <_memtrace3_internal_core.h>
 
 #if !(MEMTRACE3_CONFIG_IGNORE_NDEBUG + 0) && defined(NDEBUG)
 	MEMTRACE3_INTERNAL_ISSUE_WARNING("NDEBUG is defined and memtrace3.h is included.")
@@ -15,6 +15,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#if (MEMTRACE3_INTERNAL_FUNCTION_SUPPORT_strdup + 0) || (MEMTRACE3_INTERNAL_FUNCTION_SUPPORT_strndup + 0)
+	#include <string.h>
+#endif
 
 #if !(MEMTRACE3_CONFIG_ALLOW_REDEFINE + 0)
 	#ifdef malloc
@@ -40,6 +43,14 @@
 	#ifdef fclose
 		#error fclose already defined
 	#endif
+
+
+	#if MEMTRACE3_INTERNAL_FUNCTION_SUPPORT_strdup && defined(strdup)
+		#error strdup already defined
+	#endif
+	#if MEMTRACE3_INTERNAL_FUNCTION_SUPPORT_strndup && defined(strndup)
+		#error strndup already defined
+	#endif
 #endif
 
 
@@ -64,6 +75,17 @@
 
 #undef  fclose
 #define fclose(stream)                  (memtrace3_internal_fclose  ((stream),                     __FILE__, __LINE__))
+
+
+#if (MEMTRACE3_INTERNAL_FUNCTION_SUPPORT_strdup + 0)
+	#undef  strdup
+	#define strdup(s)     (memtrace3_internal_strdup  ((s),      __FILE__, __LINE__))
+#endif
+
+#if (MEMTRACE3_INTERNAL_FUNCTION_SUPPORT_strndup + 0)
+	#undef  strndup
+	#define strndup(s, n) (memtrace3_internal_strndup ((s), (n), __FILE__, __LINE__))
+#endif
 
 
 #endif /* MEMTRACE3_H */

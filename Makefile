@@ -70,11 +70,16 @@ install: libmemtrace.so
 	ln -fs -- $(basename $<)$(memtrace_major_minor_version)$(suffix $<) $(DESTDIR)$(libdir)/$(basename $<)$(memtrace_major_version)$(suffix $<)
 
 	mkdir -p -- $(DESTDIR)$(includedir)
-	$(INSTALL) -m644 -- include/_memtrace$(memtrace_major_version)_internal.h include/memtrace$(memtrace_major_version).h $(DESTDIR)$(includedir)
+	$(INSTALL) -m644 -- include/_memtrace$(memtrace_major_version)_internal_support.h \
+	                    include/_memtrace$(memtrace_major_version)_internal_core.h \
+	                    include/memtrace$(memtrace_major_version).h \
+	                    $(DESTDIR)$(includedir)
 .PHONY: install
 
 uninstall:
-	rm -f -- $(DESTDIR)$(includedir)/memtrace$(memtrace_major_version).h $(DESTDIR)$(includedir)/_memtrace$(memtrace_major_version)_internal.h \
+	rm -f -- $(DESTDIR)$(includedir)/memtrace$(memtrace_major_version).h \
+	         $(DESTDIR)$(includedir)/_memtrace$(memtrace_major_version)_internal_core.h \
+	         $(DESTDIR)$(includedir)/_memtrace$(memtrace_major_version)_internal_support.h \
 	         $(DESTDIR)$(libdir)/libmemtrace$(memtrace_major_version).so \
 	         $(DESTDIR)$(libdir)/libmemtrace$(memtrace_major_minor_version).so \
 	         $(DESTDIR)$(libdir)/libmemtrace$(memtrace_version).so

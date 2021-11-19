@@ -22,6 +22,19 @@
 extern "C" {
 #endif
 
+static void memtrace_print_quoted_string(const char* str);
+
+static void memtrace_print_quoted_string_with_address(const char* str) {
+	if(str == NULL) {
+		fprintf(stderr, "%p", NULL);
+		return;
+	}
+
+	fprintf(stderr, "%p (", (const void*)str);
+	memtrace_print_quoted_string(str);
+	fputc(')', stderr);
+}
+
 /**
  * Prints the string str surrounded with quotation marks *without* doing any dynamic memory allocations on the heap.
  */
