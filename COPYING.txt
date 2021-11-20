@@ -7,4 +7,6 @@ source. Copyright belongs to their respectful authors.
 
 All other files that do not match any of the before laid out rules are licensed under:
 
-        GNU General Public License v3.0 or later (LICENSES/GNU-GPL-v3.0.txt)
+        Mozilla Public License 2.0 (LICENSES/MPL-2.0.txt)
+                AND
+        Apache License 2.0 (LICENSES/Apache-2.0.txt)
