@@ -1,4 +1,5 @@
 ---
+# SPDX-License-Identifier: CC0-1.0
 name: Bug Report
 about: Report a bug/error
 labels: 'Scope: Behavior / Code, Type: Bug Report/Fix, Priority #3: High, Status #1: Requested'
