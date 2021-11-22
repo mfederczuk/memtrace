@@ -1,3 +1,8 @@
+<!--
+  Copyright (c) 2021 Michael Federczuk
+  SPDX-License-Identifier: CC-BY-SA-4.0
+-->
+
 <!-- markdownlint-disable no-duplicate-heading -->
 
 # Changelog #

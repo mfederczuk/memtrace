@@ -1,4 +1,5 @@
 ---
+# SPDX-License-Identifier: CC0-1.0
 name: Question
 about: Ask a question about the repository/project
 labels: 'Scope: N/A, Type: Question, Priority #1: Low, Status #1: Requested'

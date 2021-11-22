@@ -1,4 +1,5 @@
 ---
+# SPDX-License-Identifier: CC0-1.0
 name: Change Request
 about: Request a change/adjustment/revision/improvement
 labels: 'Scope: Behavior / Code, Type: Change, Priority #1: Low, Status #1: Requested'

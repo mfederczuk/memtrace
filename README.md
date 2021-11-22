@@ -1,3 +1,8 @@
+<!--
+  Copyright (c) 2021 Michael Federczuk
+  SPDX-License-Identifier: CC-BY-SA-4.0
+-->
+
 # Memtrace #
 
 [version_shield]: https://img.shields.io/badge/version-v2.0.0-informational.svg
@@ -112,4 +117,4 @@ Read through the [Contribution Guidelines](CONTRIBUTING.md) if you want to contr
 
 **Memtrace** is licensed under both the [**Mozilla Public License 2.0**](LICENSES/MPL-2.0.txt) AND the
 [**Apache License 2.0**](LICENSES/Apache-2.0.txt).  
-For more information about copying and licensing, see the [COPYING.txt](COPYING.txt) file.
+For more information about copying and licensing, see the [`COPYING.txt`](COPYING.txt) file.
