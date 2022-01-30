@@ -44,7 +44,11 @@ ifneq "$(STDC)" ""
  override STDC := -std=$(STDC)
 endif
 
-CFLAGS = $(STDC) $(c99_compat) \
+ifneq "$(O)" ""
+ override O := -O$(O)
+endif
+
+CFLAGS = $(STDC) $(c99_compat) $(O) \
          -Wall -Wextra -Wconversion \
          -pedantic -Wpedantic -pedantic-errors -Werror=pedantic
 
