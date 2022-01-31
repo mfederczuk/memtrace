@@ -11,6 +11,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [**Keep a Changelog v1.0.0**](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [**Semantic Versioning v2.0.0**](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased ##
+
+### Added ###
+
+* Issues a compiler warning when `NDEBUG` is defined and `memtrace3.h` is included.  
+  May be disabled by defining `MEMTRACE3_CONFIG_IGNORE_NDEBUG` as a nonzero value
+* Allows to redefine macros by defining `MEMTRACE3_CONFIG_ALLOW_REDEFINE` as a nonzero value
+* New functions that are traced:
+  * `fopen`
+  * `freopen`
+  * `fclose`
+  * `strdup`
+  * `strndup`
+* Extensive documentation in the [`Documentation/`](Documentation) directory
+
+### Changed ###
+
+* Headers, macros, etc. will from now on always be suffixed with the major version.
+  * The header filename was changed from `memtrace.h` to `memtrace3.h`
+  * The library name was changed from `memtrace` to `memtrace3`
+
+### Removed ###
+
+* The `_MEMTRACE` macro is not queried anymore; **Memtrace** is now always enabled when including `memtrace.h`
+
+### Fixed ###
+
+* The value of `errno` will now be restored after the printing calls
+* Replace `#warning` directive in header with `_Pragma` operators for pedantic compatibility
+
 ## [v2.0.0] - 2020-11-06 ##
 
 [v2.0.0]: https://github.com/mfederczuk/memtrace/releases/v2.0.0

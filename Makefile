@@ -1,5 +1,5 @@
 #!/usr/bin/make -f
-# Copyright (c) 2020 Michael Federczuk
+# Copyright (c) 2022 Michael Federczuk
 # SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
 
 SHELL = /bin/sh
@@ -8,61 +8,90 @@ exec_prefix = $(prefix)
 includedir  = $(prefix)/include
 libdir      = $(exec_prefix)/lib
 
-CFLAGS = -Iinclude -std=c99 -Wall -Wextra -pedantic -pedantic-errors
 
 CC      ?= cc
 INSTALL ?= install
 
+ifeq "$(CC)" ""
+ $(error CC must not be empty)
+endif
+ifeq "$(INSTALL)" ""
+ $(error INSTALL must not be empty)
+endif
+
+override real_cc := $(notdir $(realpath $(shell command -v $(CC))))
+
+ifeq "$(real_cc)" ""
+ $(error Invalid compiler command: $(CC))
+endif
+
+ifeq "$(findstring gcc,$(real_cc))" "gcc"
+ override c99_compat := -Wc99-c11-compat
+else
+ ifeq "$(findstring gnu,$(real_cc))" "gnu"
+  override c99_compat := -Wc99-c11-compat
+ else
+  ifeq "$(findstring clang,$(real_cc))" "clang"
+   override c99_compat := -Wc99-compat
+  else
+   $(warning Could not determine compiler; no C99 compatibility flag added)
+  endif
+ endif
+endif
+
+
+ifneq "$(STDC)" ""
+ override STDC := -std=$(STDC)
+endif
+
+ifneq "$(O)" ""
+ override O := -O$(O)
+endif
+
+CFLAGS = $(STDC) $(c99_compat) $(O) \
+         -Wall -Wextra -Wconversion \
+         -pedantic -Wpedantic -pedantic-errors -Werror=pedantic
+
+
+override memtrace_major_version := 3
+override memtrace_minor_version := 0
+override memtrace_patch_version := 0
+
+override memtrace_major_minor_version := $(memtrace_major_version).$(memtrace_minor_version)
+override memtrace_version := $(memtrace_major_minor_version).$(memtrace_patch_version)
+
+
 all: libmemtrace.so
 .PHONY: all
 
-object: bin/memtrace.c.so
-bin/memtrace.c.so: src/memtrace.c
-	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@ -fPIC
-.PHONY: object
+obj/memtrace.c.so: src/memtrace.c src/memtrace_print_quoted_string.c
+	mkdir -p -- $(dir $@)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -Iinclude -fPIC -c $< -o $@
 
-library: libmemtrace.so
-libmemtrace.so: bin/memtrace.c.so
-	$(CC) $(CFLAGS) $^ -o $@ -shared
-.PHONY: library
+libmemtrace.so: obj/memtrace.c.so
+	$(CC) $(LDFLAGS) $(CFLAGS) -shared $^ -o $@
 
-install: install/headers install/library
-install/headers: include/_memtrace.h include/memtrace.h
-	mkdir -p $(DESTDIR)$(includedir)
-	$(INSTALL) -m644 $^ $(DESTDIR)$(includedir)
-install/library: install/libmemtrace.so
-install/libmemtrace.so: libmemtrace.so
-	mkdir -p $(DESTDIR)$(libdir)
-	$(INSTALL) -m644 $< $(DESTDIR)$(libdir)/$<.2.0.0
-	ln -fs $<.2.0.0 $(DESTDIR)$(libdir)/$<.2.0
-	ln -fs $<.2.0   $(DESTDIR)$(libdir)/$<.2
-	ln -fs $<.2     $(DESTDIR)$(libdir)/$<
-.PHONY: install \
-        install/headers \
-        install/library \
-        install/libmemtrace.so
+install: libmemtrace.so memtrace.7.gz
+	$(INSTALL) -m644 -DT -- $< $(DESTDIR)$(libdir)/$(basename $<)$(memtrace_version)$(suffix $<)
 
-uninstall: uninstall/headers uninstall/library
-uninstall/headers:
-	rm -f $(DESTDIR)$(includedir)/_memtrace.h $(DESTDIR)$(includedir)/memtrace.h
-uninstall/library: uninstall/libmemtrace.so
-uninstall/libmemtrace.so:
-	rm -f $(DESTDIR)$(libdir)/libmemtrace.so
-	rm -f $(DESTDIR)$(libdir)/libmemtrace.so.2
-	rm -f $(DESTDIR)$(libdir)/libmemtrace.so.2.0
-	rm -f $(DESTDIR)$(libdir)/libmemtrace.so.2.0.0
-.PHONY: uninstall \
-        uninstall/headers \
-        uninstall/library \
-        uninstall/libmemtrace.so
+	ln -fs -- $(basename $<)$(memtrace_version)$(suffix $<)             $(DESTDIR)$(libdir)/$(basename $<)$(memtrace_major_minor_version)$(suffix $<)
+	ln -fs -- $(basename $<)$(memtrace_major_minor_version)$(suffix $<) $(DESTDIR)$(libdir)/$(basename $<)$(memtrace_major_version)$(suffix $<)
 
-clean: clean/object clean/library
-clean/object: clean/bin/memtrace.c.so
-clean/library: clean/libmemtrace.so
-clean/bin/memtrace.c.so clean/libmemtrace.so: %:
-	rm -f $(@:clean/%=%)
-.PHONY: clean \
-        clean/object \
-        clean/library \
-        clean/bin/memtrace.c.so clean/libmemtrace.so
+	mkdir -p -- $(DESTDIR)$(includedir)
+	$(INSTALL) -m644 -Dt $(DESTDIR)$(includedir) -- include/_memtrace$(memtrace_major_version)_internal_support.h \
+	                                                include/_memtrace$(memtrace_major_version)_internal_core.h \
+	                                                include/memtrace$(memtrace_major_version).h
+.PHONY: install
+
+uninstall:
+	rm -fv -- $(DESTDIR)$(includedir)/memtrace$(memtrace_major_version).h \
+	          $(DESTDIR)$(includedir)/_memtrace$(memtrace_major_version)_internal_core.h \
+	          $(DESTDIR)$(includedir)/_memtrace$(memtrace_major_version)_internal_support.h \
+	          $(DESTDIR)$(libdir)/libmemtrace$(memtrace_major_version).so \
+	          $(DESTDIR)$(libdir)/libmemtrace$(memtrace_major_minor_version).so \
+	          $(DESTDIR)$(libdir)/libmemtrace$(memtrace_version).so
+.PHONY: uninstall
+
+clean:
+	rm -fv libmemtrace.so obj/memtrace.c.so
+.PHONY: clean
