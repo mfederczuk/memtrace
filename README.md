@@ -1,14 +1,18 @@
 <!--
-  Copyright (c) 2021 Michael Federczuk
+  Copyright (c) 2022 Michael Federczuk
   SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 
 # Memtrace #
 
-[version_shield]: https://img.shields.io/badge/version-v2.0.0-informational.svg
-[release_page]: https://github.com/mfederczuk/memtrace/releases/tag/v2.0.0 "Release v2.0.0"
-[![version: v2.0.0][version_shield]][release_page]
-[![Changelog](https://img.shields.io/badge/-Changelog-informational.svg)](CHANGELOG.md "Changelog")
+[![version: 3.0.0][release_shield]][release_page]
+[![Changelog][changelog_shield]](CHANGELOG.md "Changelog") &nbsp;
+[![Documentation][documentation_shield]](Documentation/README.md)
+
+[release_shield]: https://img.shields.io/badge/version-3.0.0-informational.svg
+[release_page]: https://github.com/mfederczuk/memtrace/releases/tag/v3.0.0 "Release v3.0.0"
+[changelog_shield]: https://img.shields.io/badge/-Changelog-informational.svg
+[documentation_shield]: https://img.shields.io/badge/-Documentation-informational.svg
 
 ## About ##
 
@@ -19,9 +23,8 @@ The calls are printed out in the format of "`<source_file>:<line>: <function_nam
 
 ## Usage ##
 
-Include both `stdlib.h` and `memtrace3.h` in *source* files that you want to debug.
-In which order you include `stdlib.h` and `memtrace3.h` doesn't matter.  
-Do *not* include `memtrace3.h` in any header files!
+Include `memtrace3.h` in *source* files that you want to debug.  
+It is not recommended to include `memtrace3.h` in any header files.
 
 ```c
 #include <memtrace3.h>
@@ -33,17 +36,17 @@ int main() {
 }
 ```
 
-The target binary must also be linked with the `memtrace3` library.
+The target binary must be linked with the `memtrace3` library.
 
 ```sh
 cc main.c -lmemtrace3
 ```
 
-Major and minor versions can also be specified when linking.
+Possible output:
 
-```sh
-cc main.c -lmemtrace3.0
-cc main.c -lmemtrace3.0.0
+```console
+main.c:5: malloc(64): 0x47c2a0
+main.c:6: free(0x47c2a0)
 ```
 
 **Memtrace** should *purely* be used for debugging purposes.
@@ -57,50 +60,11 @@ block, which should only be entered when compiling debug builds of your software
 #endif
 ```
 
-When the `NDEBUG` macro is defined and `memtrace3.h` is included, a warning will be given.  
-This warning may be disabled by defining the `MEMTRACE3_CONFIG_IGNORE_NDEBUG` macro as an expression that evaluates to a
-nonzero value.
-
-By default, when a macro with the same name of an allocation function is defined, including `memtrace3.h` will issue an
-error.  
-Defining the `MEMTRACE3_CONFIG_ALLOW_REDEFINE` macro as an expression that evaluates to a nonzero value will first
-undefine the macros.
-
-### Example ###
-
-#### `main.c` ####
-
-```c
-#include <memtrace3.h>
-#include <stdlib.h>
-
-int main() {
-	int *v = malloc(sizeof(int) * 64);
-
-	v = realloc(v, sizeof(int) * 128);
-
-	free(v);
-
-	v = calloc(32, sizeof(int));
-
-	free(v);
-}
-```
-
-#### Possible Output ####
-
-```txt
-$ cc main.c -lmemtrace3 && ./a.out
-main.c:7: malloc(256): 0x561d520912a0
-main.c:9: realloc(0x561d520912a0, 512): 0x561d520912a0
-main.c:11: free(0x561d520912a0)
-main.c:13: calloc(32, 4): 0x561d520914b0
-main.c:15: free(0x561d520914b0)
-```
+For more information visit the [extensive documentation](Documentation/README.md).
 
 ## Download & Installation ##
 
-Clone this repository, build the library and install it.
+Download the source code (by cloning the repository), build the library and install it.
 
 ```sh
 git clone -b v3.0.0 -o memtrace3 https://github.com/mfederczuk/memtrace.git &&

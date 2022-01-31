@@ -24,6 +24,7 @@ and this project adheres to [**Semantic Versioning v2.0.0**](https://semver.org/
   * `fclose`
   * `strdup`
   * `strndup`
+* Extensive documentation in the [`Documentation/`](Documentation) directory
 
 ### Changed ###
 

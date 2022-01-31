@@ -27,7 +27,8 @@ But before doing anything, please read and follow these rules and guidelines:
   Instead, use **GitHub** reactions to "upvote" or "downvote" other issues, pull requests, discussions or comments.
 
 * **Development Guides**  
-  When submitting a pull request, make sure to read through and follow the [Development Guidelines](DEVELOPING.md).
+  When submitting a pull request, make sure to read through and follow the
+  [Development Guidelines](Documentation/Developing.md).
 
 There are a variety of things that can be done to contribute:
 
