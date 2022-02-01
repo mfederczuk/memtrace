@@ -19,7 +19,7 @@ ifeq "$(INSTALL)" ""
  $(error INSTALL must not be empty)
 endif
 
-override real_cc := $(notdir $(realpath $(shell command -v $(CC))))
+override real_cc := $(notdir $(realpath $(shell $(SHELL) -c 'command -v $(CC)')))
 
 ifeq "$(real_cc)" ""
  $(error Invalid compiler command: $(CC))
@@ -71,7 +71,7 @@ obj/memtrace.c.so: src/memtrace.c src/memtrace_print_quoted_string.c
 libmemtrace.so: obj/memtrace.c.so
 	$(CC) $(LDFLAGS) $(CFLAGS) -shared $^ -o $@
 
-install: libmemtrace.so memtrace.7.gz
+install: libmemtrace.so
 	$(INSTALL) -m644 -DT -- $< $(DESTDIR)$(libdir)/$(basename $<)$(memtrace_version)$(suffix $<)
 
 	ln -fs -- $(basename $<)$(memtrace_version)$(suffix $<)             $(DESTDIR)$(libdir)/$(basename $<)$(memtrace_major_minor_version)$(suffix $<)
