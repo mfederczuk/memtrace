@@ -65,7 +65,7 @@ all: libmemtrace.so
 .PHONY: all
 
 obj/memtrace.c.so: src/memtrace.c src/memtrace_print_quoted_string.c
-	mkdir -p -- $(dir $@)
+	mkdir -p -- $(@D)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -Iinclude -fPIC -c $< -o $@
 
 libmemtrace.so: obj/memtrace.c.so
