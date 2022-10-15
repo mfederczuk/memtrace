@@ -61,17 +61,18 @@ override memtrace_major_minor_version := $(memtrace_major_version).$(memtrace_mi
 override memtrace_version := $(memtrace_major_minor_version).$(memtrace_patch_version)
 
 
-all: libmemtrace.so
+all: build/bin/artifacts/libmemtrace.so
 .PHONY: all
 
-obj/memtrace.c.so: src/memtrace.c src/memtrace_print_quoted_string.c
+build/obj/memtrace.c.so: src/memtrace.c src/memtrace_print_quoted_string.c
 	mkdir -p -- $(@D)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -Iinclude -fPIC -c $< -o $@
 
-libmemtrace.so: obj/memtrace.c.so
+build/bin/artifacts/libmemtrace.so: build/obj/memtrace.c.so
+	mkdir -p -- $(@D)
 	$(CC) $(LDFLAGS) $(CFLAGS) -shared $^ -o $@
 
-install: libmemtrace.so
+install: build/bin/artifacts/libmemtrace.so
 	$(INSTALL) -m644 -DT -- $< $(DESTDIR)$(libdir)/$(basename $<)$(memtrace_version)$(suffix $<)
 
 	ln -fs -- $(basename $<)$(memtrace_version)$(suffix $<)             $(DESTDIR)$(libdir)/$(basename $<)$(memtrace_major_minor_version)$(suffix $<)
@@ -93,5 +94,5 @@ uninstall:
 .PHONY: uninstall
 
 clean:
-	rm -fv libmemtrace.so obj/memtrace.c.so
+	rm -rfv build
 .PHONY: clean
