@@ -1,0 +1,40 @@
+.\" Copyright (c) 2022 Michael Federczuk
+.\" SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
+.\"
+.\" See man(7) and man-pages(7) for conventions and guidelines for writing man pages
+.TH MEMTRACE 3memtrace TBD 3.0.0 "Memtrace man page"
+.SH NAME
+memtrace \- C Library to trace allocation function calls
+.SH SYNOPSIS
+.\" TODO
+.SH DESCRIPTION
+.\" TODO
+.SH EXAMPLES
+.EX
+#include <stdlib.h>
+#include <memtrace3.h>
+
+int main() {
+	void* p = malloc(8);
+	p = realloc(p, 16);
+	free(p);
+}
+.EE
+.PP
+.SS Possible output
+\&
+.EX
+main.c:5: malloc(8): 0x17432a0
+main.c:6: realloc(0x17432a0, 16): 0x17432a0
+main.c:7: free(0x17432a0)
+.EE
+.SH SEE ALSO
+.BR malloc (3),
+.BR realloc (3),
+.BR calloc (3),
+.BR free (3),
+.BR fopen (3),
+.BR freopen (3),
+.BR fclose (3),
+.BR strdup (3),
+.BR strndup (3)

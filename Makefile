@@ -3,10 +3,16 @@
 # SPDX-License-Identifier: MPL-2.0 AND Apache-2.0
 
 SHELL = /bin/sh
+
 prefix      = /usr/local
+
 exec_prefix = $(prefix)
 includedir  = $(prefix)/include
 libdir      = $(exec_prefix)/lib
+
+datarootdir = $(prefix)/share
+mandir      = $(datarootdir)/man
+man3dir     = $(mandir)/man3
 
 
 CC      ?= cc
@@ -61,7 +67,7 @@ override memtrace_major_minor_version := $(memtrace_major_version).$(memtrace_mi
 override memtrace_version := $(memtrace_major_minor_version).$(memtrace_patch_version)
 
 
-all: build/bin/artifacts/libmemtrace.so
+all: build/bin/artifacts/libmemtrace.so build/man/man3/memtrace.3memtrace.gz
 .PHONY: all
 
 build/obj/memtrace.c.so: src/memtrace.c src/memtrace_print_quoted_string.c
@@ -72,7 +78,12 @@ build/bin/artifacts/libmemtrace.so: build/obj/memtrace.c.so
 	mkdir -p -- $(@D)
 	$(CC) $(LDFLAGS) $(CFLAGS) -shared $^ -o $@
 
-install: build/bin/artifacts/libmemtrace.so
+build/man/man3/memtrace.3memtrace.gz: memtrace.3memtrace
+	mkdir -p -- $(@D)
+	gzip --keep --no-name --fast -- $<
+	mv -T -- $<.gz $@
+
+install: build/bin/artifacts/libmemtrace.so build/man/man3/memtrace.3memtrace.gz
 	$(INSTALL) -m644 -DT -- $< $(DESTDIR)$(libdir)/$(basename $<)$(memtrace_version)$(suffix $<)
 
 	ln -fs -- $(basename $<)$(memtrace_version)$(suffix $<)             $(DESTDIR)$(libdir)/$(basename $<)$(memtrace_major_minor_version)$(suffix $<)
@@ -82,10 +93,13 @@ install: build/bin/artifacts/libmemtrace.so
 	$(INSTALL) -m644 -Dt $(DESTDIR)$(includedir) -- include/_memtrace$(memtrace_major_version)_internal_support.h \
 	                                                include/_memtrace$(memtrace_major_version)_internal_core.h \
 	                                                include/memtrace$(memtrace_major_version).h
+
+	$(INSTALL) -m644 -Dt $(DESTDIR)$(man3dir) -- build/man/man3/memtrace.3memtrace.gz
 .PHONY: install
 
 uninstall:
-	rm -fv -- $(DESTDIR)$(includedir)/memtrace$(memtrace_major_version).h \
+	rm -fv -- $(DESTDIR)$(man3dir)/memtrace.3memtrace.gz \
+	          $(DESTDIR)$(includedir)/memtrace$(memtrace_major_version).h \
 	          $(DESTDIR)$(includedir)/_memtrace$(memtrace_major_version)_internal_core.h \
 	          $(DESTDIR)$(includedir)/_memtrace$(memtrace_major_version)_internal_support.h \
 	          $(DESTDIR)$(libdir)/libmemtrace$(memtrace_major_version).so \
